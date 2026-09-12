@@ -1,0 +1,547 @@
+/* =========================================================
+   Bienvenue dans l'univers de Mario
+   Feuille de style commune a toutes les pages du site.
+   Graphisme calque sur les copies d'ecran du sujet.
+   HTML + CSS uniquement (ni PHP, ni JavaScript).
+   ========================================================= */
+
+:root {
+    --rouge-mario: #f30b0e;
+    --noir-nav: #0a0000;
+    --gris-nav: #262626;
+    --gris-bordure: #5a5656;
+    --gris-zebre: #f2f2f2;
+    --gris-bouton: #787676;
+    --gris-champ: #767676;
+    --bleu-recap: #1b1b64;
+    --blanc: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 16px;
+    color: #000000;
+    background-color: var(--blanc);
+    /* fond raye en diagonale ( \ ) */
+    background-image: repeating-linear-gradient(
+        45deg,
+        #f7f7f7 0px,
+        #f7f7f7 5.5px,
+        #ffffff 5.5px,
+        #ffffff 9.2px
+    );
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+/* =========================================================
+   1. En-tete rouge
+   ========================================================= */
+
+.bandeau {
+    position: relative;
+    background-color: var(--rouge-mario);
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 90px;
+}
+
+/* le bloc "?" renvoie vers la page de connexion */
+.bandeau .lien-logo {
+    position: absolute;
+    left: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 0;
+}
+
+.bandeau .logo-bloc {
+    height: 70px;
+    width: auto;
+}
+
+.bandeau h1 {
+    color: var(--blanc);
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* =========================================================
+   2. Barre de navigation rayee
+   ========================================================= */
+
+nav {
+    background-color: var(--noir-nav);
+    background-image: repeating-linear-gradient(
+        45deg,
+        var(--gris-nav) 0px,
+        var(--gris-nav) 5.3px,
+        var(--noir-nav) 5.3px,
+        var(--noir-nav) 9.2px
+    );
+    padding: 11px 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.2rem;
+    flex-wrap: wrap;
+}
+
+nav a,
+nav a:visited {
+    display: inline-block;
+    color: var(--blanc);
+    text-decoration: none;
+    font-size: 1.5rem;
+    line-height: 1.15;
+    padding: 8px 17px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+}
+
+/* survol et page courante : plaque rouge a rivets blancs */
+nav a:hover,
+nav a:focus,
+nav a.actif {
+    background-color: var(--rouge-mario);
+    border-color: var(--blanc);
+    background-image:
+        radial-gradient(circle 3px at 10px 10px, var(--blanc) 98%, transparent 100%),
+        radial-gradient(circle 3px at calc(100% - 10px) 10px, var(--blanc) 98%, transparent 100%),
+        radial-gradient(circle 3px at 10px calc(100% - 10px), var(--blanc) 98%, transparent 100%),
+        radial-gradient(circle 3px at calc(100% - 10px) calc(100% - 10px), var(--blanc) 98%, transparent 100%);
+}
+
+/* =========================================================
+   3. Contenu principal
+   ========================================================= */
+
+main {
+    flex: 1;
+    padding: 0 0 10px;
+}
+
+.titre-page {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 22px 0 26px;
+}
+
+.intro p {
+    margin-bottom: 1em;
+    line-height: 1.18;
+}
+
+/* =========================================================
+   4. Tableaux (personnages / objets)
+   ========================================================= */
+
+.tableau {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background-color: var(--blanc);
+    margin-bottom: 18px;
+}
+
+.tableau th,
+.tableau td {
+    border: 1px solid var(--gris-bordure);
+    padding: 8px 9px;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.tableau thead th {
+    background-color: #000000;
+    color: var(--blanc);
+    font-weight: bold;
+    text-align: center;
+}
+
+/* une ligne sur deux en gris clair, en commencant par la premiere */
+.tableau tbody tr:nth-child(odd) {
+    background-color: var(--gris-zebre);
+}
+
+.tableau .col-desc {
+    line-height: 1.18;
+}
+
+.tableau .col-image {
+    text-align: center;
+}
+
+.tableau .col-image img {
+    max-width: 80px;
+    max-height: 80px;
+    object-fit: contain;
+}
+
+.tableau .c-image {
+    text-align: center;
+}
+
+.tableau .c-image img {
+    max-width: 80px;
+    max-height: 80px;
+    object-fit: contain;
+}
+
+/* largeurs de colonnes relevees sur les copies d'ecran */
+.tableau-personnages col.c-id { width: 3.5%; }
+.tableau-personnages col.c-nom { width: 9.3%; }
+.tableau-personnages col.c-desc { width: 69.1%; }
+.tableau-personnages col.c-annee { width: 10.1%; }
+.tableau-personnages col.c-role { width: 8%; }
+
+.tableau-objets col.c-nom { width: 12.1%; }
+.tableau-objets col.c-desc { width: 61.3%; }
+.tableau-objets col.c-annee { width: 8.6%; }
+.tableau-objets col.c-role { width: 6.5%; }
+.tableau-objets col.c-image { width: 11.5%; }
+
+/* =========================================================
+   5. Formulaire de contact
+   ========================================================= */
+
+.formulaire {
+    margin: 0 0 26px 56px;
+}
+
+.champ {
+    margin-bottom: 13px;
+}
+
+.champ label {
+    margin-right: 6px;
+}
+
+.champ input,
+.champ textarea {
+    font-family: inherit;
+    font-size: 1rem;
+    color: #000000;
+    background-color: var(--blanc);
+    border: 1px solid var(--gris-champ);
+    padding: 2px 4px;
+}
+
+.champ input:focus,
+.champ textarea:focus {
+    outline: 2px solid var(--rouge-mario);
+    outline-offset: 1px;
+}
+
+.champ-court input {
+    width: 214px;
+}
+
+.champ-long input {
+    width: 411px;
+}
+
+.champ-message label {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.champ-message textarea {
+    display: block;
+    width: 600px;
+    max-width: 100%;
+    height: 193px;
+    margin-left: 25px;
+    resize: both;
+}
+
+.btn-valider {
+    margin-left: 2px;
+    margin-top: 8px;
+    background-color: var(--gris-bouton);
+    color: var(--blanc);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 22px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.btn-valider:hover {
+    background-color: #5f5d5d;
+}
+
+/* =========================================================
+   6. Page de confirmation (recapitulatif)
+   ========================================================= */
+
+.recap {
+    margin: 0 0 26px 30px;
+}
+
+.recap p {
+    margin-bottom: 1em;
+    line-height: 1.2;
+}
+
+.recap .libelle {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.recap .valeur {
+    font-style: italic;
+    color: var(--bleu-recap);
+}
+
+.recap .entete-recap {
+    font-weight: bold;
+}
+
+.recap .merci {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 24px;
+}
+
+/* =========================================================
+   7. Connexion et administration
+   ========================================================= */
+
+.page-auth {
+    font-family: Arial, "Segoe UI", Helvetica, sans-serif;
+}
+
+.page-auth main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 16px 24px;
+}
+
+.titre-auth {
+    color: var(--rouge-mario);
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.bonjour {
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+.consigne {
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+.lien-deco,
+.lien-deco:visited {
+    display: block;
+    text-align: center;
+    color: var(--rouge-mario);
+    font-size: 0.95rem;
+    text-decoration: none;
+    margin-bottom: 22px;
+}
+
+.lien-deco:hover {
+    text-decoration: underline;
+}
+
+.carte {
+    background-color: var(--blanc);
+    border-radius: 16px;
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.13);
+    padding: 26px 30px 28px;
+    width: 420px;
+    max-width: 100%;
+    margin-bottom: 30px;
+}
+
+.carte h3 {
+    font-size: 1.05rem;
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+
+.message {
+    background-color: #e8f5e9;
+    border: 1px solid #66bb6a;
+    border-radius: 8px;
+    color: #1b5e20;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    padding: 10px 12px;
+    text-align: center;
+}
+
+.champ-carte {
+    margin-bottom: 18px;
+}
+
+.champ-carte label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.champ-carte input {
+    display: block;
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: #000000;
+    background-color: var(--blanc);
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    padding: 11px 13px;
+}
+
+.champ-carte input::placeholder {
+    color: #9a9a9a;
+}
+
+.champ-carte input:focus {
+    outline: none;
+    border-color: var(--rouge-mario);
+}
+
+.btn-rouge {
+    display: block;
+    width: 100%;
+    background-color: var(--rouge-mario);
+    color: var(--blanc);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-rouge:hover {
+    background-color: #cf0a0c;
+}
+
+/* =========================================================
+   8. Pied de page
+   ========================================================= */
+
+footer {
+    margin-top: auto;
+}
+
+.persos {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 6px 0 0;
+}
+
+.persos img {
+    height: 80px;
+    width: auto;
+}
+
+.credits {
+    background-color: var(--rouge-mario);
+    color: var(--blanc);
+    text-align: center;
+    padding: 10px 12px;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.credits em {
+    font-style: italic;
+}
+
+/* =========================================================
+   9. Petits ecrans
+   ========================================================= */
+
+@media (max-width: 800px) {
+    .bandeau {
+        height: auto;
+        min-height: 70px;
+        padding: 10px 10px 10px 70px;
+    }
+
+    .bandeau .logo-bloc {
+        height: 52px;
+    }
+
+    .bandeau h1 {
+        font-size: 1.3rem;
+    }
+
+    nav ul {
+        gap: 0.4rem;
+    }
+
+    nav a,
+    nav a:visited {
+        font-size: 1.05rem;
+        padding: 6px 12px;
+    }
+
+    .titre-page {
+        font-size: 1.5rem;
+    }
+
+    .formulaire {
+        margin-left: 12px;
+    }
+
+    .champ-court input,
+    .champ-long input,
+    .champ-message textarea {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .recap {
+        margin-left: 12px;
+    }
+
+    .tableau {
+        font-size: 0.85rem;
+    }
+
+    .tableau th,
+    .tableau td {
+        padding: 5px 6px;
+    }
+
+    .persos img {
+        height: 55px;
+    }
+}
